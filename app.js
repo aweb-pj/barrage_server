@@ -32,6 +32,10 @@ io.on('connection', function (socket) {
     let complete_message = { id: snowflake.nextId(), content: content, clicks: 0, bg_color: 'rgb(255,255,255)' }
     io.emit('server_message', complete_message)
   })
+
+  socket.on('client_click', function (id) {
+    socket.broadcast.emit('server_click', id)
+  })
 })
 
 // app.post('/register', function (req, res) {
