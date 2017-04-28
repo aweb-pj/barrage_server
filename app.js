@@ -28,12 +28,7 @@ io.on('connection', function (socket) {
   })
 
   socket.on('client_message', function (message) {
-    // console.log(data)
-    let sender = message.receiver
-    // let random_message_content = _.sample(preset_messages)
-    let message_time = moment().calendar()
-    let random_message = {sender: sender, content: message.content, time: message_time}
-    socket.broadcast.emit('server_message', random_message)
+    socket.broadcast.emit('server_message', message)
   })
 })
 
