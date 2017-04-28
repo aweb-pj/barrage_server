@@ -7,6 +7,7 @@ const express = require('express')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
+const snowflake = require('node-snowflake').Snowflake
 
 // const low = require('lowdb')
 
@@ -27,8 +28,9 @@ io.on('connection', function (socket) {
     // socket.emit('update_contacts', robots)
   })
 
-  socket.on('client_message', function (message) {
-    socket.broadcast.emit('server_message', message)
+  socket.on('client_message', function (content) {
+    let complete_message = { id: snowflake.nextId(), content: content, clicks: 0, bg_color: 'rgb(255,255,255)' }
+    io.emit('server_message', complete_message)
   })
 })
 
