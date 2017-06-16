@@ -36,6 +36,10 @@ io.on('connection', function (socket) {
   socket.on('client_click', function (id) {
     socket.broadcast.emit('server_click', id)
   })
+
+  socket.on('client_dislike', function (id) {
+  	socket.broadcast.emit('server_dislike', id)
+  })
 })
 
 // app.post('/register', function (req, res) {
